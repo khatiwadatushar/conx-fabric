@@ -1928,7 +1928,7 @@ root.longpress = function(conf) {
 };
 
 root.tap = function(conf) {
-	conf.delay = conf.delay || 500;
+	conf.delay = conf.delay || 1000;
 	conf.timeout = conf.timeout || 250;
 	conf.driftDeviance = conf.driftDeviance || 10;
 	conf.gesture = conf.gesture || "tap";
@@ -1950,7 +1950,7 @@ root.tap = function(conf) {
 				for (var key in conf.tracker) {
 					var point = conf.tracker[key];
 					if (point.end === true) return;
-					if (conf.cancel) return;
+					// if (conf.cancel) return;
 					fingers ++;
 				}
 				// Send callback.
@@ -1974,7 +1974,7 @@ root.tap = function(conf) {
 			var pt = conf.tracker[identifier];
 			if (!pt) continue;
 			var x = (touch.pageX - bbox.x1);
-			var y = (touch.pageY - bbox.y1);
+			var y = (touch.pageY - bbox.y1 - parseInt($(window).scrollTop()));
 			///
 			var dx = x - pt.start.x;
 			var dy = y - pt.start.y;
